@@ -24,7 +24,7 @@ class WelcomeHandler(webapp2.RequestHandler):
 	def get(self):
 		template = jinja_environment.get_template('welcome.html')
 		self.response.write(template.render())
-	
+
 class SignUpHandler(webapp2.RequestHandler):
 	def get(self):
 		template = jinja_environment.get_template('sign_up.html')
@@ -33,6 +33,10 @@ class SignUpHandler(webapp2.RequestHandler):
 	def post(self):
 		username= self.request.get('name')
 		petname= self.request.get('pet_name')
+		email = self.request.get('userEmail')
+		password= self.request.get('userPass')
+		breed = self.request.get('petbreed')
+		age = self.request.get('petAge')
 
 		template= jinja_environment.get_template('welcome.html')
 		self.response.write(template.render(

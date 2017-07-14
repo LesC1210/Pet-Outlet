@@ -68,4 +68,5 @@ app = webapp2.WSGIApplication([
 	('/', MainHandler),
 	('/welcome',WelcomeHandler),
 	('/signup', SignUpHandler),
+	('/get_sch', GetScheduleHandler),
 ], debug=True)

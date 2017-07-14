@@ -13,6 +13,7 @@ handlers:
   static_dir: resources
 
 - url: .*
+  login: required
   script: main.app
 
 libraries:

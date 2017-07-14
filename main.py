@@ -6,6 +6,7 @@ import urllib
 
 from google.appengine.ext import ndb
 
+
 class User(ndb.Model):
 	name = ndb.StringProperty()
 	userEmail = ndb.StringProperty()
@@ -13,7 +14,8 @@ class User(ndb.Model):
 	
 class Dog(ndb.Model):
 	dogName = ndb.StringProperty()
-
+	breed = ndb.StringProperty()
+		
 jinja_environment = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(
 		os.path.dirname(__file__)))
@@ -24,10 +26,10 @@ class MainHandler(webapp2.RequestHandler):
 		template = jinja_environment.get_template('pet-outlet.html')
 		self.response.write(template.render())
 	
-class WelcomeHandler(webapp2.RequestHandler):
+'''class WelcomeHandler(webapp2.RequestHandler):
 	def get(self):
 		template = jinja_environment.get_template('welcome.html')
-		self.response.write(template.render())
+		self.response.write(template.render())'''
 
 class SignUpHandler(webapp2.RequestHandler):
 	def get(self):
@@ -38,7 +40,6 @@ class SignUpHandler(webapp2.RequestHandler):
 		username= self.request.get('name')
 		petname= self.request.get('pet_name')
 		email = self.request.get('userEmail')
-		password= self.request.get('userPass')
 		breed = self.request.get('petbreed')
 		age = self.request.get('petAge')
 
@@ -52,6 +53,11 @@ class SignUpHandler(webapp2.RequestHandler):
 				'pet_name': petname,
 				'email': email,
 			}))
+class GetScheduleHandler(webapp2.RequestHandler):
+	def get(self):
+		template = jinja_environment.get_template('get_sch.html')
+		self.response.write(template.render())
+		 
 
 class WelcomeHandler(webapp2.RequestHandler):
 	def get(self):
@@ -62,5 +68,4 @@ app = webapp2.WSGIApplication([
 	('/', MainHandler),
 	('/welcome',WelcomeHandler),
 	('/signup', SignUpHandler),
-
 ], debug=True)

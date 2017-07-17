@@ -43,20 +43,16 @@ class SignUpHandler(webapp2.RequestHandler):
 		breed = self.request.get('petbreed')
 		age = self.request.get('petAge')
 
-		new_user = User(name = username)
+		new_user = User(name = username, age=age)
 		user_key = new_user.put()
 
 		template= jinja_environment.get_template('welcome.html')
 		self.response.write(template.render(
 			{
 				'name': username,
-				'pet_name': petname,
+				'pet_name': petname.id(),
 				'email': email,
 			}))
-class GetScheduleHandler(webapp2.RequestHandler):
-	def get(self):
-		template = jinja_environment.get_template('get_sch.html')
-		self.response.write(template.render())
 		 
 
 class WelcomeHandler(webapp2.RequestHandler):
@@ -66,7 +62,7 @@ class WelcomeHandler(webapp2.RequestHandler):
 
 class ScheduleHandler(webapp2.RequestHandler):
 	def get(self):
-		
+		pet_query=Pet.query(Pet.age < 2)
 		template = jinja_environment.get_template()
 		self.response.write(template.render())
 
@@ -74,6 +70,5 @@ app = webapp2.WSGIApplication([
 	('/', MainHandler),
 	('/welcome',WelcomeHandler),
 	('/signup', SignUpHandler),
-	('/get_sch', GetScheduleHandler),
 	('/schedule', ScheduleHandler),
 ], debug=True)

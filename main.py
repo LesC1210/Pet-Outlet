@@ -66,6 +66,7 @@ class WelcomeHandler(webapp2.RequestHandler):
 
 class ScheduleHandler(webapp2.RequestHandler):
 	def get(self):
+		
 		template = jinja_environment.get_template()
 		self.response.write(template.render())
 

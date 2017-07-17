@@ -54,10 +54,10 @@ class SignUpHandler(webapp2.RequestHandler):
 				'email': email,
 			}))
 
-class WelcomeHandler(webapp2.RequestHandler):
+'''class WelcomeHandler(webapp2.RequestHandler):
 	def get(self):
 		template = jinja_environment.get_template('welcome.html')
-		self.response.write(template.render())
+		self.response.write(template.render())'''
 
 class ScheduleHandler(webapp2.RequestHandler):
 	def get(self):
@@ -66,7 +66,7 @@ class ScheduleHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
 	('/', MainHandler),
-	('/welcome',WelcomeHandler),
+	#('/welcome',WelcomeHandler),
 	('/signup', SignUpHandler),
 	('/schedule', ScheduleHandler),
 ], debug=True)

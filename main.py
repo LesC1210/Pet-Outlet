@@ -64,9 +64,15 @@ class WelcomeHandler(webapp2.RequestHandler):
 		template = jinja_environment.get_template('welcome.html')
 		self.response.write(template.render())
 
+class ScheduleHandler(webapp2.RequestHandler):
+	def get(self):
+		template = jinja_environment.get_template('welcome.html')
+		self.response.write(template.render())
+
 app = webapp2.WSGIApplication([
 	('/', MainHandler),
 	('/welcome',WelcomeHandler),
 	('/signup', SignUpHandler),
 	('/get_sch', GetScheduleHandler),
+	('/schedule', ScheduleHandler),
 ], debug=True)

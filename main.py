@@ -10,11 +10,11 @@ from google.appengine.ext import ndb
 class User(ndb.Model):
 	name = ndb.StringProperty()
 	userEmail = ndb.StringProperty()
-	userPass= ndb.StringProperty()
 	
 class Dog(ndb.Model):
 	dogName = ndb.StringProperty()
 	breed = ndb.StringProperty()
+	age = ndb.StringProperty()
 		
 jinja_environment = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(
@@ -60,9 +60,10 @@ class SignUpHandler(webapp2.RequestHandler):
 
 class ScheduleHandler(webapp2.RequestHandler):
 	def get(self):
-		template = jinja_environment.get_template('quickstart.py')
+		template = jinja_environment.get_template('schedule.html')
 		self.response.write(template.render())
 
+		
 app = webapp2.WSGIApplication([
 	('/', MainHandler),
 	#('/welcome',WelcomeHandler),

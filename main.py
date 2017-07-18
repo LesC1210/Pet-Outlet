@@ -60,6 +60,7 @@ class SignUpHandler(webapp2.RequestHandler):
 
 class ScheduleHandler(webapp2.RequestHandler):
 	def get(self):
+		age = self.request.get('petAge')
 
 		if (age < 3):
 			template = jinja_environment.get_template('schedule1.html')

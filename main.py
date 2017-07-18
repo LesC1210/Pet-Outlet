@@ -51,7 +51,6 @@ class SignUpHandler(webapp2.RequestHandler):
 			{
 				'name': username,
 				'pet_name': petname,
-				'email': email,
 			}))
 
 '''class WelcomeHandler(webapp2.RequestHandler):
@@ -61,7 +60,7 @@ class SignUpHandler(webapp2.RequestHandler):
 
 class ScheduleHandler(webapp2.RequestHandler):
 	def get(self):
-		template = jinja_environment.get_template('schedule.html')
+		template = jinja_environment.get_template('quickstart.py')
 		self.response.write(template.render())
 
 app = webapp2.WSGIApplication([

@@ -14,7 +14,7 @@ class User(ndb.Model):
 class Dog(ndb.Model):
 	dogName = ndb.StringProperty()
 	breed = ndb.StringProperty()
-	age = ndb.StringProperty()
+	age = ndb.IntegerProperty()
 		
 jinja_environment = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(
@@ -60,8 +60,18 @@ class SignUpHandler(webapp2.RequestHandler):
 
 class ScheduleHandler(webapp2.RequestHandler):
 	def get(self):
-		template = jinja_environment.get_template('schedule.html')
-		self.response.write(template.render())
+
+		if (age < 3):
+			template = jinja_environment.get_template('schedule1.html')
+			self.response.write(template.render())
+
+		elif (age < 9):
+			template = jinja_environment.get_template('schedule2.html')
+			self.response.write(template.render())
+
+		else:
+			template = jinja_environment.get_template('schedule3.html')
+			self.response.write(template.render())
 
 		
 app = webapp2.WSGIApplication([

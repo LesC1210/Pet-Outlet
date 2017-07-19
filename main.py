@@ -10,7 +10,6 @@ from google.appengine.ext import ndb
 
 class User(ndb.Model):
 	name = ndb.StringProperty()
-	userEmail = ndb.StringProperty()
 	
 class Dog(ndb.Model):
 	dogName = ndb.StringProperty()
@@ -58,6 +57,7 @@ class SignUpHandler(webapp2.RequestHandler):
 			{
 				'name': username,
 				'pet_name': petname,
+				'dog_key' : dog_key.id()
 			}))
 
 '''class WelcomeHandler(webapp2.RequestHandler):
@@ -69,7 +69,7 @@ class ScheduleHandler(webapp2.RequestHandler):
 	def get(self):
 		username = self.request.get('username')
 		logging.info(age)
-		user= User.query(Username ==username).fetch()[0]
+		username= User.query(Username ==username).fetch()[0]
 		dog= Dog.query(userID == user_key()).fetch()[0]
 		age = dogAge
 		age = int

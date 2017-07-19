@@ -9,11 +9,11 @@ from google.appengine.ext import ndb
 
 
 class User(ndb.Model):
-	name = ndb.StringProperty()
+	name = ndb.StringProperty() 
 	
 class Dog(ndb.Model):
 	dogName = ndb.StringProperty()
-	userID = ndb.StringProperty()
+	userID = ndb.IntegerProperty()
 	age = ndb.IntegerProperty()
 		
 jinja_environment = jinja2.Environment(
@@ -46,6 +46,9 @@ class SignUpHandler(webapp2.RequestHandler):
 		new_user = User(name = username)
 		user_key = new_user.put()
 
+		logging.info(age) 
+		age = int(age)
+
 		dog = Dog(dogName=petname, userID=user_key.id(), age=age)
 		dog_key= dog.put()
 
@@ -67,34 +70,28 @@ class SignUpHandler(webapp2.RequestHandler):
 
 class ScheduleHandler(webapp2.RequestHandler):
 	def get(self):
-		username = self.request.get('username')
-		logging.info(age)
-		username= User.query(Username ==username).fetch()[0]
-		dog= Dog.query(userID == user_key()).fetch()[0]
-		age = dogAge
-		age = int
+		#logging.info(age)
+		dog_key = self.request.get('id')
+		#dog_key = int(dog_key)
+		dog_model = User.get_by_id(dog_key)
+		#username = User.query(User.name == username).fetch()[0]
+		logging.info(User.key.id)
+		dog = Dog.query(Dog.userID == username.key.id()).fetch()[0]
+		age = dog.age
+		
 
 
 		if (age < 3):
 			template = jinja_environment.get_template('schedule1.html')
-			self.response.write(template.render(
-				{
-					'petAge' : age
-				}))
+			self.response.write(template.render())
 
 		elif (age < 9):
 			template = jinja_environment.get_template('schedule2.html')
-			self.response.write(template.render(
-				{
-					'petAge' : age
-				}))
+			self.response.write(template.render())
 
 		else:
 			template = jinja_environment.get_template('schedule3.html')
-			self.response.write(template.render(
-				{
-					'petAge' : age
-				}))
+			self.response.write(template.render())
 
 
 		

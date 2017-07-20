@@ -41,7 +41,7 @@ class SignUpHandler(webapp2.RequestHandler):
 		petname= self.request.get('pet_name')
 		email = self.request.get('userEmail')
 		breed = self.request.get('petbreed')
-		age = self.request.get('petAge')
+		age = self.request.get('age')
 
 		new_user = User(name = username)
 		user_key = new_user.put()
@@ -71,14 +71,17 @@ class SignUpHandler(webapp2.RequestHandler):
 class ScheduleHandler(webapp2.RequestHandler):
 	def get(self):
 		#logging.info(age)
-		dog_key = self.request.get('id')
+		dog_key = self.request.get('userID')
+		dog_key=int(dog_key)
 		#dog_key = int(dog_key)
-		dog_model = User.get_by_id(dog_key)
+		#logging.info(dog_key)
+		#dog_model = User.get_by_id(dog_key)
+
 		#username = User.query(User.name == username).fetch()[0]
-		logging.info(User.key.id)
-		dog = Dog.query(Dog.userID == username.key.id()).fetch()[0]
+		#logging.info(User.key.id)
+		dog = Dog.get_by_id(dog_key)
 		age = dog.age
-		
+		logging.info(age)
 
 
 		if (age < 3):
